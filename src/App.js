@@ -3,6 +3,7 @@ import { commerce } from './lib/commerce';
 import Products from './components/Products/Products';
 import Navbar from './components/Navbar/Navbar';
 import Cart from './components/Cart/Cart';
+import Payer from './components/PayerForm/Payer/Payer';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
@@ -59,6 +60,10 @@ const App = () => {
                 handleRemoveFromCart={handleRemoveFromCart}
                 handleEmptyCart={handleEmptyCart}
                 />
+            </Route>
+
+            <Route exact path="/payer">
+                <Payer cart={cart}/>
             </Route>
             </Switch>
         </div>
