@@ -4,10 +4,11 @@ import useStyles from './styles';
 import AddressForm from '../AddressForm';
 import PaymentForm from '../PaymentForm';
 import { commerce } from '../../../lib/commerce';
+import { Link } from 'react-router-dom'
 
 const steps = [ 'Adresse de paiement', 'Détails du paiement'];
 
-const Payer = ({ cart }) => {
+const Payer = ({ cart, order, onCaptureCheckout, error }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [checkoutToken, setCheckoutToken] = useState(null);
     const classes = useStyles ();
@@ -22,7 +23,7 @@ const Payer = ({ cart }) => {
 
                 setCheckoutToken(token);
             } catch(error) {
-                
+                console.log(error)
             }
 }
 
@@ -38,15 +39,33 @@ const Payer = ({ cart }) => {
         nextStep();
     }
 
-    const Confirmation = () => (
-        <div>
-            Confirmation
+    let Confirmation = () => order.customer ? (
+        <>
+            <div>
+            <Typography variant="h5"> Merci pour votre achat, {order.customer.firstname} {order.customer.lastname}</Typography>
+            <Divider className={classes.divider} />
+            <Typography variant="subtitle2">Référence de commande : {order.customer.reference}</Typography>
+            </div>
+            <br />
+            <Button component={Link} to="/" variant="outlined" type="button"> Retour à l'accueil </Button>
+        </>
+    ) : (
+        <div className={classes.spinner}>
+            <CircularProgress />
         </div>
-    )
+    );
+
+    if(error) {
+        <>
+            <Typography variant="h5">Errir: {error}</Typography>
+            <br />
+            <Button component={Link} to="/" variant="outlined" type="button"> Retour à l'accueil </Button>
+        </>
+    }
 
     const Form = () => activeStep == 0 
         ? <AddressForm checkoutToken={checkoutToken} next={next} />
-        : <PaymentForm shippingData={shippingData} />
+        : <PaymentForm shippingData={shippingData} checkoutToken={checkoutToken} nextStep={nextStep} backStep={backStep} onCaptureCheckout={onCaptureCheckout}/>
     return (
         <>
             <div className={classes.toolbar} />
