@@ -11,6 +11,7 @@ const Payer = ({ cart }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [checkoutToken, setCheckoutToken] = useState(null);
     const classes = useStyles ();
+    const [shippingData, setShippingData] = useState({});
 
     useEffect(() => {
         const generateToken = async () => {
@@ -23,10 +24,19 @@ const Payer = ({ cart }) => {
             } catch(error) {
                 
             }
-        }
+}
 
         generateToken();
     }, [cart]);
+
+    const nextStep = () => setActiveStep ((preActiveStep) => preActiveStep + 1);
+    const backStep = () => setActiveStep ((preActiveStep) => preActiveStep -1);
+
+    const next = (data) => {
+        setShippingData(data);
+
+        nextStep();
+    }
 
     const Confirmation = () => (
         <div>
@@ -35,9 +45,8 @@ const Payer = ({ cart }) => {
     )
 
     const Form = () => activeStep == 0 
-        ? <AddressForm checkoutToken={checkoutToken}/>
-        : <PaymentForm />
-
+        ? <AddressForm checkoutToken={checkoutToken} next={next} />
+        : <PaymentForm shippingData={shippingData} />
     return (
         <>
             <div className={classes.toolbar} />
@@ -58,5 +67,4 @@ const Payer = ({ cart }) => {
         </>
     )
 }
-
 export default Payer
