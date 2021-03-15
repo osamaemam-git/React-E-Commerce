@@ -5,6 +5,9 @@ import Navbar from './components/Navbar/Navbar';
 import Cart from './components/Cart/Cart';
 import Payer from './components/PayerForm/Payer/Payer';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './components/Pages/Home'
+import Carousel from '../src/components/Carousel/Carousel'
+
 
 const App = () => {
     const [products, setProducts] = useState ([]);
@@ -65,10 +68,14 @@ const App = () => {
     return (
         <Router>
         <div>
-            <Navbar totalItems={cart.total_items} />
-            <Switch>
-            <Route exact path="/">
+        <Navbar totalItems={cart.total_items} />
+        <Switch>
+            <Route exact path="/products">
             <Products products={products} onAddToCart={handleAddToCart}/>
+            </Route>
+
+            <Route exact path="/">
+            <Home />
             </Route>
 
             <Route exact path="/cart">

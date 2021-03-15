@@ -3,12 +3,32 @@ import { makeStyles, fade } from '@material-ui/core/styles';
 const drawerWidth = 0;
 
 export default makeStyles((theme) => ({
-  appBar: {
+
+  h6: {
+    underline: 'none',
+    textdecoration: 'none',
+  },
+
+  prodBar: {
+    inherit: 'black',
     boxShadow: 'none',
-    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
+      textdecoration: 'none',
+      underline: 'none',
+      justifyContent: 'center',
+    },
+  },
+
+  appBar: {
+    inherit: 'black',
+    boxShadow: 'none',
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+      textdecoration: 'none',
+      underline: 'none',
     },
   },
   title: {
@@ -18,8 +38,11 @@ export default makeStyles((theme) => ({
     textDecoration: 'none',
   },
   image: {
-    marginRight: '10px',
+    margin: 'auto',
     textdecoration: 'none',
+    alignItems: 'center',
+    overflow: 'hidden',
+
   },
   menuButton: {
     marginRight: theme.spacing(2),
