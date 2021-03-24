@@ -34,7 +34,7 @@ function HeroSection() {
         Paiement sécurisé <FcApproval className="fcApp"/>
         </h1>
         <h1 className="teou1">
-        Amram est une pute<FcLike className="fcLike"/>
+        by Osama and David with<FcLike className="fcLike"/>
         </h1>
         <h1 className="teou2">
         Sandbox Website (inDev) <SiReact className="fcReact"/>
